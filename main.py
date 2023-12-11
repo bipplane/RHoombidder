@@ -3,6 +3,7 @@ from telegram.ext import *
 from requests import *
 import os, func
 
+PORT = int(os.environ.get('PORT', 5000))
 updater = Updater(token=os.environ['TOKEN'])
 dispatcher = updater.dispatcher
 

@@ -2,6 +2,8 @@ import requests
 from telegram import *
 from telegram.ext import *
 from requests import *
+from threading import Thread
+from flask import Flask
 import random
 
 api_url = "https://randomuser.me/api/"
@@ -11,6 +13,22 @@ username = response.get("results")[0]["login"]["username"]
 pinfo = " ".join(response.get("results")[0]["name"].values())
 user_matric_dict, matric_bid_dict = {},{}
 choice = False
+
+app = Flask('')
+
+@app.route('/')
+
+def home():
+    return "I'm alive"
+
+def run():
+  app.run(host='0.0.0.0',port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
+keep_alive()
 
 def startCommand(update: Update, context: CallbackContext): #basic startup command
   buttons = [[KeyboardButton("/queue")],[KeyboardButton("/echo [message]")], 
