@@ -1,20 +1,22 @@
 from telegram import *
 from telegram.ext import *
 from requests import *
-import os
+import os, func
 
 updater = Updater(token=os.environ['TOKEN'])
 dispatcher = updater.dispatcher
 
-def startCommand(update: Update, context: CallbackContext):
-    buttons = [[KeyboardButton("Tap to make money")], [KeyboardButton("Tap to do nothing")], [KeyboardButton("Tap to kick the bot")], [KeyboardButton("PAY 9371 3379")]]
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Welcome to my bot!", reply_markup=ReplyKeyboardMarkup(buttons))
-def endCommand(update: Update, context: CallbackContext):
-  
-  context.bot.send_message(chat_id=update.effective_chat.id, text="I am now useless", reply_markup = ReplyKeyboardRemove())
-
-dispatcher.add_handler(CommandHandler("start", startCommand))
-dispatcher.add_handler(CommandHandler("killthebot", endCommand))
+dispatcher.add_handler(CommandHandler("start", func.startCommand))
+dispatcher.add_handler(CommandHandler("killthebot", func.endCommand))
+dispatcher.add_handler(CommandHandler("echo", func.EchoCommand))
+dispatcher.add_handler(CommandHandler("queue", func.QueueStatusCommand))
+dispatcher.add_handler(CommandHandler("check", func.RoomAvailabilityCommand))
+dispatcher.add_handler(CommandHandler("room", func.RoomStatusCommand))
+dispatcher.add_handler(CommandHandler("matric", func.MatricNumberCommand))
+dispatcher.add_handler(CommandHandler("info", func.UserInfoCommand))
+dispatcher.add_handler(CommandHandler("bid", func.RoomBidCommand))
+dispatcher.add_handler(CommandHandler("confirm", func.confirmHelper))
+dispatcher.add_handler(CommandHandler("reject", func.rejectHelper))
 
 updater.start_polling()
 
