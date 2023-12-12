@@ -5,13 +5,15 @@ from requests import *
 from threading import Thread
 from flask import Flask
 import random
+import info
 
-api_url = "https://randomuser.me/api/"
+api_url = "https://room-reg.vercel.app/"
 api = requests.get(api_url)
 response = api.json()
 username = response.get("results")[0]["login"]["username"]
 pinfo = " ".join(response.get("results")[0]["name"].values())
 user_matric_dict, matric_bid_dict = {},{}
+test_dict = info.info()
 choice = False
 
 app = Flask('')
@@ -47,8 +49,9 @@ def CheckTeleHandleHelper(update: Update, context: CallbackContext): #checks tel
 
 def UserInfoCommand(update: Update, context: CallbackContext): #gets user info
   if CheckTeleHandleHelper(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="@" + username
-                             + "\n" + pinfo)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="@" + 
+                             user_matric_dict[update.message.chat.username] + "\n" + 
+                             test_dict[user_matric_dict[update.message.chat.username]])
 
 def EchoCommand(update: Update, context: CallbackContext) -> None: #echo message command
   context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text[6:])
@@ -96,14 +99,17 @@ def RoomAvailabilityCommand(update: Update, context: CallbackContext): #checks f
 def RoomBidCommand(update: Update, context: CallbackContext): #bids for room
   global choice, rm 
   if CheckTeleHandleHelper(update, context):
-    rm = update.message.text.strip()[-1:-5:-1][::-1]
-    if str(rm).isdigit() and \
-    len(str(update.message.text).strip(" ")[5:]) == 4:
-      context.bot.send_message(chat_id=update.effective_chat.id, text="Would you like to bid for "
-                               + rm + "? Type /confirm " + rm + " to confirm; /reject to cancel.")
-      choice = True
+    if random.randint(0,1):
+      rm = update.message.text.strip()[-1:-5:-1][::-1]
+      if str(rm).isdigit() and \
+      len(str(update.message.text).strip(" ")[5:]) == 4:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Would you like to bid for "
+                                 + rm + "? Type /confirm " + rm + " to confirm; /reject to cancel.")
+        choice = True
+      else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Invalid room number.")
     else:
-      context.bot.send_message(chat_id=update.effective_chat.id, text="Invalid room number.")
+      context.bot.send_message(chat_id=update.effective_chat.id, text="Bidding unavailable for " + user_matric_dict[update.message.chat.username] + ".")
   
 def confirmHelper(update: Update, context: CallbackContext): #confirms user bid
   global choice, rm

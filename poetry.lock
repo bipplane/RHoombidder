@@ -1,4 +1,12 @@
 [[package]]
+name = "accc"
+version = "0.0.3"
+description = "Always Correct Correctness Compilator"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "aiohttp"
 version = "3.8.1"
 description = "Async http client/server framework (asyncio)"
@@ -506,9 +514,10 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "5512ae2fd4ab0b417489e5d180629a69d6e0e20cd3b02a71c5feb369c60870fb"
+content-hash = "b81fdc58093ea1cd94fdf2efc01efa9af19fe54d02c6c773f95f4c0055d8fa9f"
 
 [metadata.files]
+accc = []
 aiohttp = []
 aiosignal = []
 async-timeout = []

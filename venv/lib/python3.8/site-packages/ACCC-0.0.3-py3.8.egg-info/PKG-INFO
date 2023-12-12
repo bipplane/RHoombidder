@@ -1,0 +1,114 @@
+Metadata-Version: 1.1
+Name: ACCC
+Version: 0.0.3
+Summary: Always Correct Correctness Compilator
+Home-page: https://github.com/Aluriak/ACCC
+Author: aluriak
+Author-email: lucas.bourneuf@laposte.net
+License: UNKNOWN
+Description: # Always Correct Correctness Compiler
+        Python implementation of a very basic langage compiler that never throw errors while compiling. (almost)  
+        Its not a big and complex compiler, and its implementation is something like awful.  
+        Some links are given below.
+        
+        
+        ## Errors
+        The only errors releved by the compiler is :
+        - source code contains characters not present in provided alphabet;
+        - provided vocabulary don't follow conventions of writing;
+        
+        If these conditions are respected, whatever you give to the __ACCC__, it will always return something valid.
+        (but it can be an empty code)
+        
+        
+        ## Bias
+        If compiled source code is too short, or made of lots of repetitions, 
+        some bias can appear:  
+        - always same values in object code  
+        - lots of neutral values  
+        
+        The bigger is the vocabulary and bigger is the list of lexems,   
+        the less bias will appear.
+        
+        
+        ## Interests
+        A compilable source code is a string of characters.  
+        Valid characters are provided at Compiler instanciation.  
+        
+        For example, if you have the alphabet *'01'*, 
+        any string exclusively composed of *'0'* and *'1'* is compilable and will produce something.  
+        
+        Any little modification of the string can lead to heavy or no modification of object code.  
+        In fact, with ACCC you can generate mutation of a source code without problem of compilation error.  
+        
+        Write a code with lots of parameters is another way to do almost the same thing.
+        
+        
+        ## Object code
+        Currently, current object langage is __very simple__: you can compare things, and do things.
+        That's all. No loops, variables, functions, objects,… Just conditions and actions.
+        
+        This is an example of code, not totally illogic, created one time with a source code size of 60 and the alphabet '01':  
+        (indentation can miss)   
+        
+                if parameter1 == parameter2 and haveThat:
+                    do_that
+                    if have_that:
+                        say_this
+                        do_that
+                        if know_that and have_many_things:
+                            do_that
+                            say_this
+                        do_that
+                    if have_many_things:
+                        say_this
+        
+        Please have a look to docstring of *Compiler* class for more details about that. (notabily used vocabulary)  
+        
+        
+        ## I/O speaking
+        Inputs:
+        - iterable of characters (doublons are unexpected) that compose the source code  
+        - vocabulary used for compiling  
+        
+        Outputs:  
+        - a python compilable code, according to vocabulary  
+        
+        
+        ## Next improvements
+        In random-priority order:  
+        - [ ] allow lexems to have arguments;  
+        - [ ] create before convert in any langage;  
+        - [ ] allow configuration of output langage;    
+        - [ ] unit tests;  
+        - [ ] usage example;  
+        - [ ] base tables on source code instead of only vocabulary;  
+        - [X] upload on pypi and github (see links below);  
+        
+        
+        
+        ## Why don't you use…
+        Someone do the same thing ? Or better ?  
+        Give me the link, i want to see that !
+        
+        
+        ## Why do that ?
+        1. It's fun
+        2. I need it for test something in another project (an Evolution simulation named [EvolAcc](http://www.github.com/Aluriak/EvolAcc) ; no surprise)
+        
+        
+        ## Links
+        - ACCC on [github](http://www.github.com/Aluriak/ACCC);  
+        - ACCC on [pypi](https://pypi.python.org/pypi/ACCC);  
+        
+        
+        
+Keywords: compilation compiler correctness
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Natural Language :: English
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Software Development :: Compilers
